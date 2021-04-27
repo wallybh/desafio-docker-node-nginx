@@ -2,11 +2,13 @@ version: "3"
 
 services:
     db:
-        image: "mysql:8.0"
+        image: "mysql:5.7"
         container_name: "desafio-nginx-node-db"
         environment: 
             - MYSQL_ALLOW_EMPTY_PASSWORD
             - MYSQL_DATABASE
+            - MYSQL_USER
+            - MYSQL_PASSWORD
         networks: 
             - desafio-nginx-node-back
     nginx:
@@ -23,10 +25,10 @@ services:
         volumes: 
             - ./node:/app
         working_dir: /app
-        ports: 
-            - 3000:3000
         environment: 
             - MYSQL_DATABASE
+            - MYSQL_USER
+            - MYSQL_PASSWORD
         networks: 
             - desafio-nginx-node-back
         depends_on: 
