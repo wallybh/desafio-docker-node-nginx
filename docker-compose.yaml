@@ -12,11 +12,27 @@ services:
         networks: 
             - desafio-nginx-node-back
     nginx:
-        container_name: "desfio-nginx-node-nginx"  
+        container_name: "desafio-nginx-node-nginx"  
         build: 
             context: ./nginx
         ports: 
             - 8080:80
+        depends_on: 
+            - db
+            - web
+        networks: 
+            - desafio-nginx-node-front
+    web:
+        container_name: "desafio-nginx-node-web"
+        build: 
+            context: ./node
+        environment: 
+            - MYSQL_DATABASE
+            - MYSQL_USER
+            - MYSQL_PASSWORD
+        networks: 
+            - desafio-nginx-node-back
+            - desafio-nginx-node-front
         depends_on: 
             - db
     node-cli:

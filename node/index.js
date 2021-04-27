@@ -5,7 +5,7 @@ const mysql = require('mysql')
 
 const connection = mysql.createPool({
     connectionLimit: 10,
-    host: 'db',
+    host: 'desafio-nginx-node-db',
     user: 'root',
     database: process.env.MYSQL_DATABASE,
     multipleStatements: true
