@@ -17,6 +17,22 @@ services:
             - 8080:80
         depends_on: 
             - db
+    node-cli:
+        container_name: "nodejs-cli"
+        image: "node:16"
+        volumes: 
+            - ./node:/app
+        working_dir: /app
+        ports: 
+            - 3000:3000
+        environment: 
+            - MYSQL_DATABASE
+        networks: 
+            - desafio-nginx-node-back
+        depends_on: 
+            - db
+        profiles:
+            - dev
 
 networks: 
     desafio-nginx-node-back:
