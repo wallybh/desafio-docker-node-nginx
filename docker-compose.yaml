@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+    db:
+        image: "mysql:8.0"
+        container_name: "desafio-nginx-node-db"
+        environment: 
+            - MYSQL_ALLOW_EMPTY_PASSWORD
+            - MYSQL_DATABASE
+        networks: 
+            - desafio-nginx-node-back
+    nginx:
+        container_name: "desfio-nginx-node-nginx"  
+        build: 
+            context: ./nginx
+        ports: 
+            - 8080:80
+        depends_on: 
+            - db
+
+networks: 
+    desafio-nginx-node-back:
+        driver: bridge
+    desafio-nginx-node-front:
+        driver: bridge
